@@ -1,0 +1,27 @@
+echo "Dear User. We use Alpine Linux."
+echo "Alpine uses a different package manager."
+echo "To install packages use the apk command."
+echo ""
+sleep 1
+echo "> Trying to install via apk..."
+action=$1
+shift
+if [ "$action" == "update" ]; then
+  echo "Updating..."
+  apk update
+  echo "> Update done."
+fi
+if [ "$action" == "install" ]; then
+  echo "Installing..."
+  for var in "$@"
+  do
+      if [[ "$var" == "-"* ]]; then
+        echo "> '$var' is an option. Ignoring..."
+      else
+        echo "> Installing $var"
+        apk add $var
+      fi
+  done
+  echo "> Update done."
+fi
+chmod 777 /bin/apt
