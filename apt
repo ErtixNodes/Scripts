@@ -27,7 +27,6 @@ if [ "$action" == "install" ]; then
         echo "> '$var' is an option. Ignoring..."
       else
         echo "> Installing $var"
-        apk info $var
         apk add -v --no-interactive --progress -u $var
       fi
   done
