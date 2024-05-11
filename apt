@@ -3,6 +3,11 @@ echo "Alpine uses a different package manager."
 echo "To install packages use the apk command."
 echo ""
 sleep 1
+echo "ErtixNodes has made a simple apt to apk wrapper. This may contain errors or do not work."
+sleep 0.5
+echo "Use the apk command instead."
+echo "Using wrapper in 3 seconds..."
+sleep 3
 echo "> Trying to use apt wrapper..."
 action=$1
 shift
