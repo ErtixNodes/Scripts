@@ -3,7 +3,7 @@ echo "Alpine uses a different package manager."
 echo "To install packages use the apk command."
 echo ""
 sleep 1
-echo "> Trying to install via apk..."
+echo "> Trying to use apt wrapper..."
 action=$1
 shift
 if [ "$action" == "update" ]; then
@@ -13,15 +13,21 @@ if [ "$action" == "update" ]; then
 fi
 if [ "$action" == "install" ]; then
   echo "Installing..."
+  echo "> Updating cache..."
+  apk update
+  echo "> Cache updated!"
   for var in "$@"
   do
       if [[ "$var" == "-"* ]]; then
         echo "> '$var' is an option. Ignoring..."
       else
         echo "> Installing $var"
-        apk add $var
+        apk info $var
+        apk add -v --no-interactive --progress -u $var
       fi
   done
   echo "> Update done."
 fi
-chmod 777 /bin/apt
+if [ "$action" == "" ]; then
+  echo "No action was given..."
+fi
